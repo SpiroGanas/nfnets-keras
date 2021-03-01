@@ -55,7 +55,7 @@ class StochasticDepth(Model):
     def call(self, x, training):
         if not training: return x
         batch_size = x.shape[0]
-        if batch_size is None: batch_size=1
+        if batch_size is None: return x
         r = tf.random.uniform(shape = [batch_size, 1, 1, 1], dtype = x.dtype)
         keep_prob = 1. - self.drop_rate
         binary_tensor = tf.floor(keep_prob + r)
